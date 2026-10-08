@@ -1,10 +1,11 @@
-import Hero from "./components/Hero";
+import Hero from "@/components/Hero";
+
 
 
 const page = () => {
     return (
         <div>
-            <Hero></Hero>
+        <Hero></Hero>
         </div>
     );
 };
