@@ -19,7 +19,7 @@ const ScrollText = async() => {
     
     return (
         <div className="pt-2">
-            <Marquee>
+            <Marquee speed={80}>
             {data.map(d => <span className="m-2" key={d.id}>
             <span className="mx-1"> 
              {d.image}
