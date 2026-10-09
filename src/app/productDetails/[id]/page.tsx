@@ -95,42 +95,59 @@ const ProductDetails = async({params}:productDetailsPageProps) => {
     </div>
 </div>
 <div className="relative mx-auto max-w-7xl">
-            <p>দামের সারসংক্ষেপ</p>
+            <p className="mt-4 mb-4 font-bold">দামের সারসংক্ষেপ</p>
 
-            <div>
-<div className="rounded-2xl border border-gray-200 bg-white p-4"  key={data.id}>
-    <div className="flex items-center gap-3">
-        <div>
-          <p className="font-bold">সর্বনিম্ন দাম</p>
-            <h3 className="font-semibold text-green-500">
-                {data.markets[0].min} টাকা
-            </h3>
-            <p>সবচেয়ে কম দামের বাজার</p>
+           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"> 
+          <div className="rounded-2xl border border-gray-200 bg-white p-5"> 
+            <p className="font-bold">সর্বনিম্ন দাম</p> 
+            <h3 className="mt-2 text-xl font-semibold text-green-500">
+               {data.markets[0].min} টাকা </h3>
+                <p className="mt-1 text-sm text-gray-500"> সবচেয়ে কম দামের বাজার </p> 
+                </div> 
+                <div className="rounded-2xl border border-gray-200 bg-white p-5"> 
+                  <p className="font-bold">সর্বাধিক দাম</p> 
+                  <h3 className="mt-2 text-xl font-semibold text-red-500">
+                     {data.markets[0].max} টাকা </h3>
+                      <p className="mt-1 text-sm text-gray-500"> সবচেয়ে বেশি দামের বাজার </p> 
+                      </div> 
+                      <div className="rounded-2xl border border-gray-200 bg-white p-5"> 
+                        <p className="font-bold">গড় দাম</p>
+                         <h3 className="mt-2 text-xl font-semibold text-green-500"> 
+                          {((data.markets[0].max + data.markets[0].min) / 2)} টাকা </h3> 
+                          <p className="mt-1 text-sm text-gray-500"> প্রতি কেজি-এর হিসাবে </p> 
+                          </div> 
+                          </div>
+
         </div>
 
-        <div className="flex items-center gap-3">
-        <div>
-          <p className="font-bold">সর্বাধিক দাম</p>
-            <h3 className="font-semibold text-red-500">
-                {data.markets[0].max} টাকা
-            </h3>
-            <p>সবচেয়ে বেশি দামের বাজার</p>
-        </div>
-</div>
-     <div className="flex items-center gap-3">
-        <div>
-          <p className="font-bold">গড় দাম</p>
-            <h3 className="font-semibold text-green-500">
-                {(data.markets[0].max+ data.markets[0].min)/2} টাকা
-            </h3>
-            <p>প্রতি কেজি-এর হিসাবে</p>
-        </div>
-    </div>
-    </div>
+        <div className="relative mx-auto max-w-7xl">
+        <p className="mt-4 mb-4 font-bold"> বাজারভিত্তিক আজকের দাম </p>
 
-</div>
-            </div>
 
+         <table className="w-full text-left">
+    <thead>
+        <tr className="border-b-2 border-gray-500">
+            <th>বাজার</th>
+            <th>বিভাগ</th>
+            <th>সর্বনিম্ন</th>
+            <th>সর্বাধিক</th>
+            <th>গড়</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {data.markets.map((market) => (
+            <tr key={market.market} className="border-b border-gray-500">
+                <td>{market.market}</td>
+                <td>{market.division}</td>
+                <td>{market.min} টাকা</td>
+                <td>{market.max} টাকা</td>
+                <td>{(market.min + market.max) / 2} টাকা</td>
+            </tr>
+        ))}
+    </tbody>
+</table>
+       
         </div>
         </div>
     );
