@@ -4,7 +4,7 @@ interface Nav {
     "id": string,
     "slug": string,
     "nameBn": string,
-    "icon": string
+    "icon": string,
 }
 
 const NavLinks = async() => {
@@ -14,7 +14,11 @@ const NavLinks = async() => {
 
     return (
         <div className="flex gap-4">
-           {navs.map((n,i) => <Link key={i} href={n.slug}>{n.icon}{n.nameBn}</Link>)}
+            {navs.map((n) => (
+                <Link key={n.id} href={`/${n.slug}`}>
+                    {n.icon} {n.nameBn}
+                </Link>
+            ))}
         </div>
     );
 };
