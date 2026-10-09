@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Link from 'next/link';
 interface Products {
     "id": number,
     "nameBn": string,
@@ -31,10 +31,10 @@ const Dashboard = async() => {
                 <p className="text-red-600">▲</p>
                 <p className="font-bold"> আজ দাম বেড়েছে </p>
             </div>
-
             <div className='grid grid-cols-3 gap-4 mx-2'>
                 {increasedProducts.map((product) => ( 
-                  <div className="rounded-2xl border border-gray-200 bg-white p-4" key={product.id}>
+        <Link href={`/productDetails/${product.id}`} key={product.id}>
+                  <div className="rounded-2xl border border-gray-200 bg-white p-4" >
     <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 text-2xl">
             {product.image}
@@ -67,8 +67,10 @@ const Dashboard = async() => {
         </span>
     </div>
 </div>
+ </Link>
  ))}
-            </div>
+  </div>
+            
 
             <div className="flex gap-2 mt-4 mb-4">
                 <p className="text-green-600">▼</p>
@@ -76,6 +78,7 @@ const Dashboard = async() => {
             </div>
         <div className='grid grid-cols-3 gap-4 mx-2'>
                 {decreasedProducts.map((product) => ( 
+                    <Link href={`/productDetails/${product.id}`} key={product.id}>
                   <div className="rounded-2xl border border-gray-200 bg-white p-4" key={product.id}>
     <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 text-2xl">
@@ -109,6 +112,7 @@ const Dashboard = async() => {
         </span>
     </div>
 </div>
+</Link>
  ))}
             </div>
             <div>
@@ -119,6 +123,7 @@ const Dashboard = async() => {
 
             <div className='grid grid-cols-3 gap-4 mx-2'>
                 {data.map((product) => ( 
+                    <Link href={`/productDetails/${product.id}`} key={product.id}>
                   <div className="rounded-2xl border border-gray-200 bg-white p-4" key={product.id}>
     <div className="flex items-center gap-3">
         <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gray-100 text-2xl">
@@ -156,6 +161,7 @@ const Dashboard = async() => {
                     </span>
     </div>
 </div>
+</Link>
  ))}
             </div>
              
