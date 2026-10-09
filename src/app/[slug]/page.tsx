@@ -1,3 +1,5 @@
+import SortableProducts from "@/components/SortableProducts";
+
 
 interface Product {
     id: number;
@@ -49,11 +51,19 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
                     </div>
                 </div>
             </div>
+            <div className="flex justify-between">
             <h1 className="mb-6 text-3xl font-bold">
                 {filteredProducts[0]?.categoryNameBn ?? slug}
             </h1>
-
+            <div className="flex flex-row gap-4 items-start">
+            <p> সাজান </p>
+           <SortableProducts products={filteredProducts} />  
+           </div>
+          </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                
+             
+                
                 {filteredProducts.map((product) => (
                     <div
                         key={product.id}
