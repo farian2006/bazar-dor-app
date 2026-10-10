@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface Nav {
     "id": string,
@@ -14,11 +15,13 @@ const NavLinks = async() => {
 
     return (
         <div className="flex gap-4">
+            <Suspense fallback={<p>লোড...</p>}>
             {navs.map((n) => (
                 <Link key={n.id} href={`/${n.slug}`}>
                     {n.icon} {n.nameBn}
                 </Link>
             ))}
+             </Suspense>
         </div>
     );
 };

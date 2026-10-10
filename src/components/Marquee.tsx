@@ -18,7 +18,7 @@ const ScrollText = async() => {
     const data:Marquee[] =await res.json();
     
     return (
-        <div className="pt-2">
+        <div className="pt-2">  
             <Marquee speed={80}>
             {data.map(d => <span className="m-2" key={d.id}>
             <span className="mx-1"> 

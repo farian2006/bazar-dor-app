@@ -3,11 +3,13 @@ import NavLinks from './NavLinks';
 import Link from 'next/link';
 import Marquee from './Marquee';
 
+
+
+
 const Header = () => {
-    const date=new Date().toLocaleDateString("bn-BD" ,{
-            dateStyle:"full",
-        }
-    );
+    const date = new Date().toLocaleDateString("bn-BD", {
+    dateStyle: "full",
+  });
 
     
     return (
@@ -19,7 +21,7 @@ const Header = () => {
    </p>
    <div>
     <p className='font-bold text-3xl'>বাজার দর</p>
-    <p>{date}</p>
+      <p>{date}</p>
    </div>
    </div>
   
