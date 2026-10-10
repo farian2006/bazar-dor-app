@@ -1,3 +1,5 @@
+"use client"
+
 import Image from 'next/image'
 import NavLinks from './NavLinks';
 import Link from 'next/link';

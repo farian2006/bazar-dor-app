@@ -2,7 +2,7 @@
 import { authClient } from "@/lib/authclient";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ReactEventHandler } from "react";
+
 
 
 const SignUpPage = () => {
