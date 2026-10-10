@@ -2,25 +2,30 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { FaGoogle } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 const SignUpPage = () => {
   const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const user = Object.fromEntries(formData.entries()) as {
-      name: string;
-      email: string;
-      password: string;
-    };
+   const user = Object.fromEntries(formData.entries()) as {name: string, email:string, image:string, password:string};
 
+
+const confirmPassword = formData.get("confirmPassword") as string;
+
+if (user.password !== confirmPassword) {
+  console.log("Passwords do not match");
+  return;
+}
     const { data, error } = await authClient.signUp.email({
       ...user,
-      callbackURL: "/",
+      callbackURL:"/",
     });
 
     if (data) {
-      redirect("/Hero");
+      redirect("/");
     }
 
     if (error) {
@@ -92,26 +97,25 @@ const SignUpPage = () => {
           </button>
 
           <p className="flex justify-center mt-2">
-            অ্যাকাউন্ট আছে?{" "}
-            <Link href="/sigin" className="text-green-600">
-              {" "}
-              সাইন ইন করুন{" "}
+            অ্যাকাউন্ট আছে?
+            <Link href="/signin" className="text-green-600">
+              সাইন ইন করুন
             </Link>
           </p>
 
           <button onClick={handleGoogleSignIn} className="btn bg-base-100 ">
+              <FaGoogle />
+  
             Google দিয়ে চালিয়ে যান
           </button>
           <button onClick={handleGithubSignIn} className="btn bg-base-100">
+             <FaGithub />
             GitHub দিয়ে চালিয়ে যান
           </button>
         </fieldset>
       </form>
 
-      <Link
-        href="/"
-        className="flex justify-center mt-4 text-gray-500"
-      >
+      <Link href="/" className="flex justify-center mt-4 text-gray-500">
         ← হোম পেজে ফিরে যান
       </Link>
     </div>

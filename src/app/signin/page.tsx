@@ -2,6 +2,8 @@
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { FaGoogle } from "react-icons/fa";
+import { FaGithub } from "react-icons/fa";
 
 
 
@@ -30,6 +32,19 @@ const SignInPage = () => {
         }
     }
 
+      const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "github",
+    });
+  };
+
+
 
 
     return (
@@ -44,23 +59,38 @@ const SignInPage = () => {
 
   <label className="label">নাম</label>
   <input type="text" className="input" placeholder="যেমন: রহিম উদ্দিন" />
-
-  <label className="label">ইমেইল</label>
-  <input type="email" className="input" placeholder="you@example.com" />
-
+  
   <label className="label">পাসওয়ার্ড</label>
   <input type="password" className="input" placeholder="কমপক্ষে ৮ অক্ষর" />
 
-  <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
-  <input type="password" className="input" placeholder="আবার লিখুন" />
+  
+ <button
+            className="btn bg-green-700 text-white rounded-2xl mt-4"
+            type="submit"
+          >
+            সাইন ইন
+          </button>
 
+           <p className="flex justify-center text-gray-500">অথবা</p>
 
-  <button className="btn bg-green-700 text-white rounded-2xl mt-4" type="submit">অ্যাকাউন্ট তৈরি করুন</button>
-    
- <p className="flex justify-center mt-2">অ্যাকাউন্ট আছে? <Link href="/sigin" className="text-green-600"> সাইন ইন করুন </Link></p>
+            <button onClick={handleGoogleSignIn} className="btn bg-base-100 ">
+                <FaGoogle />
+            Google দিয়ে চালিয়ে যান
+          </button>
+          <button onClick={handleGithubSignIn} className="btn bg-base-100">
+            <FaGithub />
+            GitHub দিয়ে চালিয়ে যান
+          </button>
 
+          <p className="flex justify-center mt-2">
+           অ্যাকাউন্ট নেই?
+            <Link href="/signup" className="text-green-600">
+              সাইন আপ করুন
+            </Link>
+          </p>
 </fieldset>
 
+      
             </form>
 
             <Link href="/Dashboard" className="flex justify-center mt-4 text-gray-500">← হোম পেজে ফিরে যান</Link>
