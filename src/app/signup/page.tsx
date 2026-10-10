@@ -20,7 +20,7 @@ const SignUpPage = () => {
     });
 
     if (data) {
-      redirect("/");
+      redirect("/Hero");
     }
 
     if (error) {
@@ -79,7 +79,7 @@ const SignUpPage = () => {
           <label className="label">পাসওয়ার্ড নিশ্চিত করুন</label>
           <input
             type="password"
-            name="password"
+            name="confirmPassword"
             className="input"
             placeholder="আবার লিখুন"
           />
@@ -109,7 +109,7 @@ const SignUpPage = () => {
       </form>
 
       <Link
-        href="/Dashboard"
+        href="/"
         className="flex justify-center mt-4 text-gray-500"
       >
         ← হোম পেজে ফিরে যান

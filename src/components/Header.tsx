@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import NavLinks from "./NavLinks";
 import Link from "next/link";
-import Marquee from "./Marquee";
 import { useEffect, useState } from "react";
 
 
@@ -51,10 +49,8 @@ const Header = () => {
 
       <div className="border-b">
         <div className="flex items-center pt-2">
-          {/* <NavLinks></NavLinks> */}
         </div>
       </div>
-      {/* <Marquee></Marquee> */}
     </div>
   );
 };

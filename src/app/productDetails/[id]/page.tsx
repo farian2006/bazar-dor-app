@@ -1,3 +1,5 @@
+export const instant = false
+
 interface products {
      "id": number,
     "slug": string,
@@ -33,7 +35,7 @@ const ProductDetails = async({params}:productDetailsPageProps) => {
     const {id} = await params;
     const res= await fetch(`https://openapi.programming-hero.com/api/bazardor/products/${id}`);
     const data:products=await res.json();
-
+  
     return (
         <div className="pt-4">
              <p className="relative mx-auto max-w-7xl pb-4"> {`হোম  > ${data.categoryNameBn} > ${data.nameBn} `}</p>

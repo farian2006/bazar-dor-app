@@ -4,6 +4,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Suspense } from "react";
+import NavLinks from "@/components/NavLinks";
+import MarqueePage from "@/components/MarqueePage";
 
 
 const noto_serif = Noto_Serif_Bengali({
@@ -26,6 +28,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
        <div>
        <Header></Header>
+        <div className="flex flex-col justify-between relative mx-auto max-w-7xl mt-4">
+        <Suspense fallback="loading..">
+        <NavLinks></NavLinks>
+         <MarqueePage/>
+         </Suspense>
+         </div>
        </div>
          {children}
         <div>
