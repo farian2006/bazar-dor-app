@@ -14,6 +14,7 @@ interface Products {
 }
 
 const Dashboard = async() => {
+   
     const res =await fetch("https://openapi.programming-hero.com/api/bazardor/products");
     const data:Products[]=await res.json();
    
