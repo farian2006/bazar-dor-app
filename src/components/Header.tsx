@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import UserInfo from "./UserInfo";
 
 
 const Header = () => {
@@ -35,22 +36,13 @@ const Header = () => {
             <p>{today}</p>
           </div>
         </div>
-
-        <div className="flex gap-3">
-          <Link href="/signin">
-            <button className="btn btn-outline font-bold">সাইন ইন</button>
-          </Link>
-          <Link href="/signup">
-            {" "}
-            <button className="btn bg-green-700 text-white">সাইন আপ</button>
-          </Link>
-        </div>
       </div>
 
       <div className="border-b">
         <div className="flex items-center pt-2">
         </div>
       </div>
+      <UserInfo></UserInfo>
     </div>
   );
 };

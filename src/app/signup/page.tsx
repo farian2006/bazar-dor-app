@@ -6,23 +6,32 @@ import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
 
 const SignUpPage = () => {
-  const onSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
-   const user = Object.fromEntries(formData.entries()) as {name: string, email:string, image:string, password:string};
+    
 
+   const formData = new FormData(e.currentTarget);
 
-const confirmPassword = formData.get("confirmPassword") as string;
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+  const confirmPassword = formData.get("confirmPassword") as string;
 
-if (user.password !== confirmPassword) {
-  console.log("Passwords do not match");
-  return;
-}
-    const { data, error } = await authClient.signUp.email({
-      ...user,
-      callbackURL:"/",
-    });
+  if (password !== confirmPassword) {
+    console.log("Passwords do not match");
+    return;
+  }
+
+   
+
+  const { data, error } = await authClient.signUp.email({
+    name,
+    email,
+    password,
+    callbackURL: "/",
+  });
+
 
     if (data) {
       redirect("/");
@@ -123,3 +132,4 @@ if (user.password !== confirmPassword) {
 };
 
 export default SignUpPage;
+
