@@ -32,7 +32,7 @@ const ProfilePage = () => {
         toast.error("Failed to update profile")
         return;
       }
-
+      toast.success("প্রোফাইল সফলভাবে আপডেট হয়েছে");
       setShow(false);
     } catch {
       toast.error("Something went wrong. Please try again.");
@@ -44,6 +44,8 @@ const ProfilePage = () => {
   const handleSignout = async () => {
     await authClient.signOut();
     toast.success("সাইন আউট সফলভাবে সম্পন্ন হয়েছে")
+ 
+   window.location.replace("/");
   };
 
   return (
