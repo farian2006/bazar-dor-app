@@ -1,103 +1,153 @@
-"use client"
+"use client";
+
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FaGoogle } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-
+import { FaEye } from "react-icons/fa";
+import { FaEyeSlash } from "react-icons/fa6";
 
 
 const SignInPage = () => {
-    const onSubmit =async(e:React.SubmitEvent<HTMLElement>) => {
-        e.preventDefault();
+  const router = useRouter();
 
-        const formData=new FormData(e.target)
-        const user =Object.fromEntries(formData.entries()) as {
-            name:string, 
-            email:string,
-            password:string,    
-        };
+  const [showPassword, setShowPassword] = useState(false);
 
-     const {data,error} =  await authClient.signIn.email({
-            ...user,
-            callbackURL:"/"
-        });
 
-        if(data){
-            redirect("/")
-        }
-        
-        if(error){
-            console.log(error);
-        }
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.currentTarget);
+
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "/",
+    });
+
+    if (error) {
+      console.log(error);
+      return;
     }
 
-      const handleGoogleSignIn = async () => {
-    await authClient.signIn.social({
+    if (data) {
+      router.push("/");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const { error } = await authClient.signIn.social({
       provider: "google",
+      callbackURL: "/",
     });
+
+    if (error) {
+      console.log(error);
+    }
   };
 
   const handleGithubSignIn = async () => {
-    await authClient.signIn.social({
+    const { error } = await authClient.signIn.social({
       provider: "github",
+      callbackURL: "/",
     });
+
+    if (error) {
+      console.log(error);
+    }
   };
 
+  return (
+    <div className="relative mx-auto max-w-7xl">
+      <div className="flex flex-col items-center justify-between mt-6 mb-6">
+        <p className="font-extrabold text-3xl">সাইন ইন</p>
 
+        <p className="text-gray-500">
+          বিস্তারিত দাম, বাজার তুলনা ও প্রোফাইল দেখতে অ্যাকাউন্টে ঢুকুন।
+        </p>
+      </div>
 
+      <form onSubmit={onSubmit} className="flex justify-center">
+        <fieldset className="fieldset bg-white rounded-box w-xs border p-4">
+          <legend className="fieldset-legend"></legend>
 
-    return (
-        <div className="relative mx-auto max-w-7xl ">
-            <div className="flex flex-col justify-between items-center mt-6 mb-6">
-                <p className="font-extrabold text-3xl">অ্যাকাউন্ট তৈরি করুন</p>
-                <p className="text-gray-500">বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন।</p>
-            </div>
-            <form onSubmit={onSubmit}>
-                <fieldset className="fieldset bg-white-200 boarder-base-300 rounded-box w-xs border p-4">
-  <legend className="fieldset-legend"></legend>
+          <label className="label">ইমেইল</label>
 
-  <label className="label">নাম</label>
-  <input type="text" className="input" placeholder="যেমন: রহিম উদ্দিন" />
-  
-  <label className="label">পাসওয়ার্ড</label>
-  <input type="password" className="input" placeholder="কমপক্ষে ৮ অক্ষর" />
+          <input
+            type="email"
+            name="email"
+            className="input"
+            placeholder="you@example.com"
+            required
+          />
 
-  
- <button
+        <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              className="input w-full pr-12"
+              placeholder="কমপক্ষে ৮ অক্ষর"
+              required
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+            >
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </button>
+          </div>
+          <button
             className="btn bg-green-700 text-white rounded-2xl mt-4"
             type="submit"
           >
             সাইন ইন
           </button>
 
-           <p className="flex justify-center text-gray-500">অথবা</p>
+          <p className="flex justify-center text-gray-500">অথবা</p>
 
-            <button onClick={handleGoogleSignIn} className="btn bg-base-100 ">
-                <FaGoogle />
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            className="btn bg-base-100"
+          >
+            <FaGoogle />
             Google দিয়ে চালিয়ে যান
           </button>
-          <button onClick={handleGithubSignIn} className="btn bg-base-100">
+
+          <button
+            type="button"
+            onClick={handleGithubSignIn}
+            className="btn bg-base-100"
+          >
             <FaGithub />
             GitHub দিয়ে চালিয়ে যান
           </button>
 
           <p className="flex justify-center mt-2">
-           অ্যাকাউন্ট নেই?
-            <Link href="/signup" className="text-green-600">
+            অ্যাকাউন্ট নেই?
+
+            <Link href="/signup" className="text-green-600 ml-1">
               সাইন আপ করুন
             </Link>
           </p>
-</fieldset>
+        </fieldset>
+      </form>
 
-      
-            </form>
-
-            <Link href="/Dashboard" className="flex justify-center mt-4 text-gray-500">← হোম পেজে ফিরে যান</Link>
-
-        </div>
-    );
+      <Link
+        href="/"
+        className="flex justify-center mt-4 text-gray-500"
+      >
+        ← হোম পেজে ফিরে যান
+      </Link>
+    </div>
+  );
 };
 
 export default SignInPage;
-

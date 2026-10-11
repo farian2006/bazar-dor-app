@@ -4,11 +4,12 @@ import { Suspense } from "react";
 
 
 
+
 const page = () => {
     return (
         <div>
         <Hero></Hero>
-        <Suspense fallback="loading..">
+        <Suspense>
         <Dashboard></Dashboard>
         </Suspense>
         </div>

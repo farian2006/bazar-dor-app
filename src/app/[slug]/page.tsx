@@ -1,4 +1,5 @@
 import SortableProducts from "@/components/SortableProducts";
+import { notFound } from "next/navigation";
 
 export const instant = false;
 
@@ -39,6 +40,10 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
   const filteredProducts = products.filter(
     (product) => product.category === slug,
   );
+
+  if (filteredProducts.length === 0) {
+    notFound();
+  }
 
   return (
     <div className="mx-auto max-w-7xl p-6">
