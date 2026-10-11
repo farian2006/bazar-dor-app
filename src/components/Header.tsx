@@ -17,8 +17,6 @@ const Header = () => {
     );
   }, []);
 
- 
-
   return (
     <div className="relative mx-auto max-w-7xl px-4 py-3 bg-base-100 shadow-sm">
       <div className="navbar justify-between">
